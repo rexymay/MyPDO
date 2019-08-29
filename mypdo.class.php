@@ -49,28 +49,40 @@ class MyPDO
     }
 
     # Get one variable
-    function get_var($sql)
+    /* 
+     * $db = new MyPDO();
+     * $name = $db->get_var('SELECT firstname FROM admin WHERE id = ?',[$id]);
+     */
+    function get_var($sql, $args = [])
     {
         $debug = 0;
-        $result = $this->run($sql)->fetch(PDO::FETCH_COLUMN,0);
+        $result = $this->run($sql, $args)->fetch(PDO::FETCH_COLUMN,0);
         if($debug) var_dump($result);
         return $result;
     }
 
-    # Get results from a query
-    function get_row($sql)
+    # Get one row from a query
+    /* 
+     * $db = new MyPDO();
+     * $data = $db->get_row('SELECT * FROM admin WHERE id = ?',[$id]);
+     */
+    function get_row($sql, $args = [])
     {
         $debug = 0;
-        $result = $this->run($sql)->fetch();
+        $result = $this->run($sql, $args)->fetch();
         if($debug) var_dump($result);
         else return $result;
     }
 
-    # Get results from a query
-    function get_results($sql)
+    # Get one or more rows from a query
+    /* 
+     * $db = new MyPDO();
+     * $data = $db->get_results('SELECT * FROM admin');
+     */
+    function get_results($sql, $args = [])
     {
         $debug = 0;
-        $result = $this->run($sql)->fetchAll();
+        $result = $this->run($sql, $args)->fetchAll();
         if($debug) var_dump($result);
         else return $result;
     }
