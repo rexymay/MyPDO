@@ -14,9 +14,11 @@ $id = 1;
 
 # Get one value 
 $name = $db->get_var('SELECT firstname FROM admin WHERE id = ?',[$id]);
+$name = $db->get_var('SELECT firstname FROM admin WHERE id = $id'); # same result
 
 # Get one row
 $data = $db->get_row('SELECT * FROM admin WHERE id = ?',[$id]);
+$data = $db->get_row('SELECT * FROM admin WHERE id = $id'); # same result
 
 # Get one or more rows
 $data = $db->get_results('SELECT * FROM admin');
